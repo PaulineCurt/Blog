@@ -1,0 +1,24 @@
+<!-- Dans ce template, je n'ai que le code HTML de la page d'accueil -->
+<section>
+    <h2>Les derniers articles</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <?php foreach ($articles as $article): ?>
+            <div class="col mb-4">
+                <article class="card article-abstract">
+                    <div class="card-body">
+                        <?php if ($article->getImage()): ?>
+                            <img src="<?=asset('img/' . $article->getImage())?>" alt="" class="card-img-top mb-2">
+                        <?php endif; ?>
+                        <h3 class="card-title"><?=$article->getTitle();?></h3>
+                        <div class="badge article-category"><?=$article->getCategoryName();?></div>
+                        <p>Créé le <?=$article->getFormattedCreatedAt();?></p>
+                        <p class="card-text"><?=mb_substr($article->getContent(), 0, 100)?> [...]</p>
+                        <a class="btn btn-primary stretched-link" href="<?=constructUrl('/article', ['id' => $article->getIdArticle()]);?>">Lire la suite</a>
+                    </div>
+                </article>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+
